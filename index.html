@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Access Request</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff99;
+      font-family: monospace;
+      padding: 2rem;
+      font-size: 1.2rem;
+    }
+    .hidden {
+      display: none;
+    }
+    input {
+      background: black;
+      border: none;
+      border-bottom: 2px solid #00ff99;
+      color: #00ff99;
+      font-size: 1.2rem;
+      width: 100%;
+      margin-top: 1rem;
+      outline: none;
+    }
+    #typedText::after {
+      content: "_";
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    #pdfViewer {
+      margin-top: 2rem;
+      width: 100%;
+      height: 80vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="typedText"></div>
+  <input type="text" id="nameInput" class="hidden" placeholder="Enter full name..." autocomplete="off"/>
+  <iframe id="pdfViewer" class="hidden" src="harmony.pdf"></iframe>
+
+  <script>
+    const message = "Enter name of user desiring access";
+    const typedText = document.getElementById("typedText");
+    const nameInput = document.getElementById("nameInput");
+    const pdfViewer = document.getElementById("pdfViewer");
+    let i = 0;
+
+    function typeMessage() {
+      if (i < message.length) {
+        typedText.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeMessage, 50);
+      } else {
+        nameInput.classList.remove("hidden");
+        nameInput.focus();
+      }
+    }
+
+    nameInput.addEventListener("keyup", function(e) {
+      if (e.key === "Enter") {
+        const input = nameInput.value.trim();
+        if (input === "Harmony Cobel") {
+          pdfViewer.classList.remove("hidden");
+        } else {
+          pdfViewer.classList.add("hidden");
+        }
+      }
+    });
+
+    typeMessage();
+  </script>
+</body>
+</html>
+
