@@ -4,6 +4,7 @@ body {
   font-family: "Courier New", Courier, monospace;
   padding: 2rem;
   font-size: 1.2rem;
+  font-weight: 600; /* Thicker text */
 }
 
 .hidden {
@@ -20,6 +21,12 @@ input {
   margin-top: 1rem;
   outline: none;
   font-family: "Courier New", Courier, monospace;
+  font-weight: 600; /* Thicker input text */
+}
+
+input::placeholder {
+  color: #1a1f8a;
+  opacity: 1;
 }
 
 #typedText::after {
